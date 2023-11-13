@@ -56,8 +56,23 @@ onEvent('block.break',event => {
     //获取方块id
     //Utils.server.tell(event.block.id);
     //特定方式以外的特定方块禁止破坏
-    if(blocklist.indexOf(event.block.id) != -1 && event.player.mainHandItem != 'Item:empty'){
-        event.cancel();
+    if(blocklist.indexOf(event.block.id) != -1 ){
+
+        
+            //判定到了方块属于抽屉
+        if(event.player.xpLevel != 0){
+            //并且等级不等于0
+            //var xp1 = "say ${name}等级够了。";
+            //${event.player.name}
+
+            event.server.runCommand(`say 等级够了！`);
+        }
+        else{
+            //如果不等于0不成立
+            event.server.runCommand(`say 等级不够！`);
+            event.cancel();
+        }
+        
     }
 })
 //没什么用但万一有用呢
